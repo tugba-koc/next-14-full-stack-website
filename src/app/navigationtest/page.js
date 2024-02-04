@@ -1,17 +1,30 @@
-"use client";
+'use client';
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+const NavigationTestPage = () => {
+  // CLIENT SIDE NAVIGATION
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-const NavigationTestpage = () => {
-    /* Client navigation */
-    const route = useRouter();
-    const path = usePathname();
-    const params = useSearchParams();
-    
-    const handleClick = () => {
+  const q = searchParams.get('q');
 
-    }
-  return <button onClick={handleClick}>click me</button>;
+  console.log(q);
+
+  const handleClick = () => {
+    console.log('clicked');
+    router.forward();
+  };
+
+  return (
+    <div>
+      <Link href='/' prefetch={false}>
+        Click here
+      </Link>
+      <button onClick={handleClick}>Write and Redirect</button>
+    </div>
+  );
 };
 
-export default NavigationTestpage;
+export default NavigationTestPage;
